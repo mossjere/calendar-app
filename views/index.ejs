@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.4.2/main.min.js"></script> -->
+  <!-- <script src="https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js"></script> -->
+  <!-- <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script> -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+</head>
+
+<body>
+  <div id='event-parkingSpot'>
+    <p>
+      <strong>Unscheduled Appointments</strong>
+    </p>
+  </div>
+  <div id="tabs">
+  <img id="trashCan" src="images/trash.png">
+    <ul>
+      <li><a href="#tabs-1">Calendar 1</a></li>
+      <li><a href="#tabs-2">Calendar 2</a></li>
+    </ul>
+    <div id="tabs-1">
+      <script src="/js/script.js"></script>
+
+      <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+
+      <div class="form-popup" id="myForm">
+        <form action="/events" method="post" target="dummyframe" class="form-container">
+          <button type="button" class="cancel" onclick="closeForm()">X</button>
+          <h1 id="formHeader">Appointment</h1>
+
+          <!-- <label for="client"><b>Client</b></label> 
+      <input type="text" id = 'formName' placeholder="Enter Client Name" name="client" required>
+  
+      <label for="phoneNumber"><b>Phone Number</b></label>
+      <input id = 'formPhone' type="tel" placeholder="Enter Client Phone" name="phoneNumber" required>
+       -->
+
+          <label for="title"><b>Title</b></label>
+          <input id='formTitle' type="text" placeholder="Appointment Name" name="title" required>
+
+          <label for="clientName"><b>Client Name</b></label>
+          <input id="formClientName" type="text" placeholder="Name" name="clientName" required>
+
+          <label for="clientPhone"><b>Client Phone Number</b></label>
+          <input id="formClientPhone" type="tel" name="clientPhone">
+
+          <label for="startTime"><b>Start Time</b></label>
+          <label for="endTime" class="rightAlign" id="formEndTimeLabel"><b>End Time</b></label>
+          <br>
+          <input id='formStartTime' type="datetime-local" name="startTime" required>
+          <input id='formEndTime' class="rightAlign" type="datetime-local" name="endTime" required>
+
+          <button type="button" class="btn appointmentBtn" onclick="submitForm()">Add Appointment</button>
+
+          <div class="moreOptionsBtn">
+            <label><b>More Options</b></label>
+            <button type="button" id="moreOptionsBtn" onclick="showMoreOptions()">⌄</button>
+          </div>
+          <div id="morOptionsDiv" style="display: none;">
+            <label for="examRoomInUse"><b>Using Exam Room</b></label>
+            <input id="formExamRoom" type="checkbox" name="examRoomInUse">
+            <div class="rightAlign">
+              <label for="farmCall"><b>Farm Call</b></label>
+              <input id="formFarmCall" type="checkbox" name="farmCall">
+            </div>
+            <br>
+            <div id="formFarmAddressDiv" style="display: none;">
+              <label for="farmCallAddress"><b>Farm Call Address</b></label>
+              <input id="formFarmAddress" type="text" name="farmCallAddress" disabled>
+            </div>
+            <script>
+              document.getElementById('formFarmCall').onchange = function () {
+                if (this.checked)
+                  document.getElementById("formFarmAddressDiv").style.display = "block";
+                else
+                  document.getElementById("formFarmAddressDiv").style.display = "none";
+                document.getElementById('formFarmAddress').disabled = !this.checked;
+              };
+
+              document.getElementById('formStartTime').onchange = function () {
+                if (!document.getElementById('formEndTime').value)
+                {
+                  const dt = new Date(this.value);
+                  dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+                  dt.setHours(dt.getHours() + 1);
+                  document.getElementById('formEndTime').value = dt.toISOString().slice(0, 16);
+                }
+              };
+            </script>
+            <label for="additionalNotes"><b>Notes</b></label>
+            <input id="formNotes" type="text" name="additionalNotes">
+          </div>
+
+          <!-- <button type="button" class="btn cancel" onclick="closeForm()">Close</button> -->
+        </form>
+      </div>
+
+      <div id='external-events'>
+        <p>
+          <strong>Common Appointments</strong>
+        </p>
+        <!-- <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event' duration='01:00'>
+        <div class='fc-event-main'>Teeth Float</div>
+    </div>
+    <div class='fc-event  fc-h-event fc-daygrid-event fc-daygrid-block-event' duration='00:30'>
+        <div class='fc-event-main'>Vaccinate</div>
+    </div>
+    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event' duration='01:30'>
+        <div class='fc-event-main'>Farm Call</div>
+    </div>
+    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event' duration='00:30'>
+        <div class='fc-event-main'>X-ray</div>
+    </div>
+    <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event' duration='01:00'>
+        <div class='fc-event-main'>Lameness</div>
+    </div> -->
+
+      </div>
+
+      <!-- <div id='event-parkingSpot'>
+        <p>
+          <strong>Unscheduled Appointments</strong>
+        </p>
+      </div> -->
+
+      <div id="mydraggable"></div>
+      <div id='calendar-container'>
+        <div id='calendar'></div>
+      </div>
+    </div>
+    <div id="tabs-2">
+      <div id='external-events2'>
+        <p>
+          <strong>Common Appointments</strong>
+        </p>
+      </div>
+      <div id="mydraggable2"></div>
+      <div id='calendar-container2'>
+        <div id='calendar2'></div>
+    </div>
+  </div>
+</body>
+
+</html>

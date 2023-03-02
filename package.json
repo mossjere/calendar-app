@@ -1,0 +1,26 @@
+{
+  "name": "calendar-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fullcalendar/common": "^5.11.4",
+    "@fullcalendar/core": "^6.1.4",
+    "@fullcalendar/daygrid": "^6.1.4",
+    "@fullcalendar/interaction": "^6.1.4",
+    "@fullcalendar/list": "^6.1.4",
+    "@fullcalendar/timegrid": "^6.1.4",
+    "axios": "^1.3.4",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "fullcalendar": "^6.1.4",
+    "jquery": "^3.6.3",
+    "sqlite3": "^5.1.4"
+  }
+}

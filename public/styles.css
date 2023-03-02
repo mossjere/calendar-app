@@ -1,0 +1,190 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+  
+  #external-events, #external-events2{
+    position: fixed;
+    z-index: 2;
+    top: 80px;
+    left: 20px;
+    width: 150px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+  }
+  
+
+  #event-parkingSpot{
+    position: fixed;
+    z-index: 2;
+    top: 500px;
+    left: 20px;
+    width: 150px;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+    background: #eee;
+  }
+
+  #trashCan{
+    position: fixed;
+    z-index: 2;
+    top: 700px;
+    left: 30px;
+    width: 100px;
+    padding: 0 10px;
+  }
+
+  .fc-day-today
+  {
+    background-color:inherit !important;
+  }
+  
+  #external-events .fc-event, #external-events2 .fc-event, #event-parkingSpot .fc-event {
+    cursor: move;
+    margin: 3px 0;
+  }
+  
+  #calendar-container, #calendar-container2 {
+    position: relative;
+    z-index: 1;
+    margin-left: 200px;
+  }
+  
+  /* #calendar, #calendar2 {
+    max-width: 1100px;
+    margin: 20px auto;
+  } */
+
+  .fc-button {
+     text-transform: capitalize; 
+    }
+
+
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+.rightAlign {
+    position: relative;
+    float: right;
+}
+
+/* #tabs { 
+    position: relative; 
+    padding-bottom: 3em; 
+} 
+#tabs .ui-tabs-nav { 
+    position: absolute; 
+    left: 0.25em; 
+    right: 0.25em; 
+    bottom: 0.25em; 
+    padding: 0em 0.2em 0.2em; 
+} 
+#tabs .ui-tabs-nav li { 
+    border-top: none; 
+    border-bottom: 1px solid #ccc; 
+    -moz-border-radius: 0px 0px 4px 4px; 
+    -webkit-border-radius: 0px 0px 4px 4px; 
+    border-radius: 0px 0px 4px 4px; 
+} 
+#tabs .ui-tabs-nav li.ui-tabs-selected, 
+#tabs .ui-tabs-nav li.ui-state-active { 
+    top: -1px; 
+} */
+.ui-tabs .ui-tabs-nav {
+    text-align: center;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    float: none !important;
+    display: inline-block;
+}
+
+.moreOptionsBtn {
+    margin: auto;
+  width: 50%;
+  text-align: center;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 500px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=tel] {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=tel]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+.formHeader {
+  display: inline;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+
+/* Add a red background color to the cancel button */
+.cancel {
+  display: inline;
+  position: absolute;
+  right: 15px;
+  /* float: right; */
+  background-color: red;
+  /* margin-left: auto;
+  margin-right: 0; */
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
