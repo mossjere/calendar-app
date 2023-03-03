@@ -15,6 +15,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
       start TEXT,
       end TEXT,
       client TEXT,
+      patient TEXT,
       doctor TEXT,
       phone TEXT,
       examRoom INTEGER,

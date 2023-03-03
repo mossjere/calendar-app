@@ -313,6 +313,15 @@ jQuery(function () {
     $("#tabs").tabs();
   });
 
+  $(function() {
+    $( "#tabs" ).tabs({ activate: function(event ,ui){
+                    //console.log(event);
+                    //alert(  ui.newTab.index());
+        // alert( ui.newTab.attr('li',"innerHTML")[0].getElementsByTagName("a")[0].innerHTML);
+        calendar2.render();
+        //alert( this.text);
+                } });});
+
   Calendar = FullCalendar.Calendar;
 
 
@@ -402,6 +411,12 @@ jQuery(function () {
         endTime: '17:00'
       }
     ],
+    slotMinTime:"05:00:00",
+    slotMaxTime:"22:00:00",
+    slotDuration:"00:15:00",
+    scrollTime:"08:00:00",
+    // slotLabelInterval:"00:15:00",
+    expandRows: true,
     editable: true,
     droppable: true, // this allows things to be dropped onto the calendar
     eventReceive: async function (info) {

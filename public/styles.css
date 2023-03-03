@@ -6,7 +6,7 @@ html, body {
   }
   
   #external-events, #external-events2{
-    position: fixed;
+    position: absolute;
     z-index: 2;
     top: 80px;
     left: 20px;
@@ -18,7 +18,7 @@ html, body {
   
 
   #event-parkingSpot{
-    position: fixed;
+    position: relative;
     z-index: 2;
     top: 500px;
     left: 20px;
@@ -28,10 +28,15 @@ html, body {
     background: #eee;
   }
 
+  .fc-non-business
+  {
+    background: #D6D6D6AC !important;
+  }
+
   #trashCan{
     position: fixed;
     z-index: 2;
-    top: 700px;
+    bottom: 50px;
     left: 30px;
     width: 100px;
     padding: 0 10px;
