@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
@@ -21,13 +21,18 @@
 </head>
 
 <body>
+  <div id='external-events'>
+    <p>
+      <strong>Common Appointments</strong>
+    </p>
+  </div>
   <div id='event-parkingSpot'>
     <p>
       <strong>Unscheduled Appointments</strong>
     </p>
   </div>
   <div id="tabs">
-  <img id="trashCan" src="images/trash.png">
+    <img id="trashCan" src="images/trash.png">
     <ul>
       <li><a href="#tabs-1">Dr. Moss</a></li>
       <li><a href="#tabs-2">Dr. Russell</a></li>
@@ -93,8 +98,7 @@
               };
 
               document.getElementById('formStartTime').onchange = function () {
-                if (!document.getElementById('formEndTime').value)
-                {
+                if (!document.getElementById('formEndTime').value) {
                   const dt = new Date(this.value);
                   dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
                   dt.setHours(dt.getHours() + 1);
@@ -110,11 +114,13 @@
         </form>
       </div>
 
-      <div id='external-events'>
+      <!-- <div id='external-events'>
         <p>
           <strong>Common Appointments</strong>
-        </p>
-        <!-- <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event' duration='01:00'>
+        </p> -->
+
+
+      <!-- <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event' duration='01:00'>
         <div class='fc-event-main'>Teeth Float</div>
     </div>
     <div class='fc-event  fc-h-event fc-daygrid-event fc-daygrid-block-event' duration='00:30'>
@@ -130,7 +136,7 @@
         <div class='fc-event-main'>Lameness</div>
     </div> -->
 
-      </div>
+      <!-- </div> -->
 
       <!-- <div id='event-parkingSpot'>
         <p>
@@ -144,19 +150,21 @@
       </div>
     </div>
     <div id="tabs-2">
-      <div id='external-events2'>
+      <!-- <div id='external-events2'>
         <p>
           <strong>Common Appointments</strong>
         </p>
-      </div>
-      <div id="mydraggable2"></div>
+      </div> -->
+      <!-- <div id="mydraggable2"></div> -->
       <div id='calendar-container2'>
         <div id='calendar2'></div>
+      </div>
     </div>
     <div id="tabs-3">
-      
-    </div>
-  </div>
+        <div id='calendar-container3'>
+          <div id='calendar3'></div>
+        </div>
+      </div>
 </body>
 
 </html>

@@ -80,12 +80,12 @@ app.get('/events', (req, res) => {
 app.post('/events', (req, res) => {
   const { title, start, end, id, 
     client, phone, examRoom, farmCall, 
-    address, notes, duration } = req.body;
+    address, notes, duration, doctor } = req.body;
   db.run(`INSERT INTO events (title, start, end, id,
-     client, phone, examRoom, farmCall, address, notes, duration)
-          VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?)`,
+     client, phone, examRoom, farmCall, address, notes, duration, doctor)
+          VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?)`,
         [title, start, end, id, client, phone, examRoom,
-        farmCall, address, notes, duration], (err) => {
+        farmCall, address, notes, duration, doctor], (err) => {
     if (err) {
       console.error(err.message);
       res.status(500).send('Failed to save event.');
@@ -169,4 +169,245 @@ app.get('/loadWaitList', (req, res) => {
       res.status(200).send(rows);
     }
   });
+});
+
+
+
+  app.get('/eventsMoss', (req, res) => {
+    db.all(`SELECT * FROM mossEvents`, (err, rows) => {
+      if (err) {
+        console.error(err.message);
+        res.status(500).send('Failed to retrieve events.');
+      } else {
+        res.status(200).send(rows);
+      }
+    });
+  });
+
+app.post('/eventsMoss', (req, res) => {
+  const { title, start, end, id, 
+    client, phone, examRoom, farmCall, 
+    address, notes, duration, doctor } = req.body;
+  db.run(`INSERT INTO mossEvents (title, start, end, id,
+     client, phone, examRoom, farmCall, address, notes, duration, doctor)
+          VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?)`,
+        [title, start, end, id, client, phone, examRoom,
+        farmCall, address, notes, duration, doctor], (err) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Failed to save event.');
+    } else {
+      res.status(200).send('Event saved successfully.');
+      console.log(req.body);
+    }
+  });
+});
+
+  app.post('/updateMossEvent', (req, res) => {
+    const { title, start, end, id} = req.body;
+    db.run(`UPDATE mossEvents 
+            SET title = ?, start = ?, end = ?
+            WHERE id = ?`, [title, start, end, id], (err) => {
+      if (err) {
+        console.error(err.message);
+        res.status(500).send('Failed to save event.');
+        console.log(req.body);
+      } else {
+        res.status(200).send('Event update saved successfully.');
+        console.log(req.body);
+      }
+    });
+  });
+
+app.post('/removeMossEvents', (req, res) => {
+  const {id} = req.body;
+      const deleteStatement = db.prepare(`DELETE FROM mossEvents WHERE id = ${id}`);
+      deleteStatement.run();
+      deleteStatement.finalize();
+});
+
+app.post('/waitListFromMoss', (req, res) => {
+  const {title, start, end, id, 
+    client, phone, examRoom, farmCall, 
+    address, notes, duration } = req.body;
+    db.run(`INSERT INTO waitList (title, start, end, id,
+      client, phone, examRoom, farmCall, address, notes, duration)
+           VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?)`,
+         [title, start, end, id, client, phone, examRoom,
+         farmCall, address, notes, duration], (err) => {
+     if (err) {
+       console.error(err.message);
+       res.status(500).send('Failed to save event.');
+     } else {
+       res.status(200).send('Event saved successfully.');
+       console.log(req.body);
+     }
+   });
+
+      const deleteStatement = db.prepare(`DELETE FROM mossEvents WHERE id = ${id}`);
+      deleteStatement.run();
+      deleteStatement.finalize();
+});
+
+
+
+
+
+
+
+app.get('/eventsRussell', (req, res) => {
+  db.all(`SELECT * FROM russellEvents`, (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Failed to retrieve events.');
+    } else {
+      res.status(200).send(rows);
+    }
+  });
+});
+
+app.post('/eventsRussell', (req, res) => {
+const { title, start, end, id, 
+  client, phone, examRoom, farmCall, 
+  address, notes, duration, doctor } = req.body;
+db.run(`INSERT INTO russellEvents (title, start, end, id,
+   client, phone, examRoom, farmCall, address, notes, duration, doctor)
+        VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?)`,
+      [title, start, end, id, client, phone, examRoom,
+      farmCall, address, notes, duration, doctor], (err) => {
+  if (err) {
+    console.error(err.message);
+    res.status(500).send('Failed to save event.');
+  } else {
+    res.status(200).send('Event saved successfully.');
+    console.log(req.body);
+  }
+});
+});
+
+app.post('/updateRussellEvent', (req, res) => {
+  const { title, start, end, id} = req.body;
+  db.run(`UPDATE russellEvents 
+          SET title = ?, start = ?, end = ?
+          WHERE id = ?`, [title, start, end, id], (err) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Failed to save event.');
+      console.log(req.body);
+    } else {
+      res.status(200).send('Event update saved successfully.');
+      console.log(req.body);
+    }
+  });
+});
+
+app.post('/removeRussellEvents', (req, res) => {
+const {id} = req.body;
+    const deleteStatement = db.prepare(`DELETE FROM russellEvents WHERE id = ${id}`);
+    deleteStatement.run();
+    deleteStatement.finalize();
+});
+
+app.post('/waitListFromRussell', (req, res) => {
+const {title, start, end, id, 
+  client, phone, examRoom, farmCall, 
+  address, notes, duration } = req.body;
+  db.run(`INSERT INTO waitList (title, start, end, id,
+    client, phone, examRoom, farmCall, address, notes, duration)
+         VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?)`,
+       [title, start, end, id, client, phone, examRoom,
+       farmCall, address, notes, duration], (err) => {
+   if (err) {
+     console.error(err.message);
+     res.status(500).send('Failed to save event.');
+   } else {
+     res.status(200).send('Event saved successfully.');
+     console.log(req.body);
+   }
+ });
+
+    const deleteStatement = db.prepare(`DELETE FROM russellEvents WHERE id = ${id}`);
+    deleteStatement.run();
+    deleteStatement.finalize();
+});
+
+
+
+
+
+
+app.get('/eventsCannon', (req, res) => {
+  db.all(`SELECT * FROM cannonEvents`, (err, rows) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Failed to retrieve events.');
+    } else {
+      res.status(200).send(rows);
+    }
+  });
+});
+
+app.post('/eventsCannon', (req, res) => {
+const { title, start, end, id, 
+  client, phone, examRoom, farmCall, 
+  address, notes, duration, doctor } = req.body;
+db.run(`INSERT INTO cannonEvents (title, start, end, id,
+   client, phone, examRoom, farmCall, address, notes, duration, doctor)
+        VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?)`,
+      [title, start, end, id, client, phone, examRoom,
+      farmCall, address, notes, duration, doctor], (err) => {
+  if (err) {
+    console.error(err.message);
+    res.status(500).send('Failed to save event.');
+  } else {
+    res.status(200).send('Event saved successfully.');
+    console.log(req.body);
+  }
+});
+});
+
+app.post('/updateCannonEvent', (req, res) => {
+  const { title, start, end, id} = req.body;
+  db.run(`UPDATE cannonEvents 
+          SET title = ?, start = ?, end = ?
+          WHERE id = ?`, [title, start, end, id], (err) => {
+    if (err) {
+      console.error(err.message);
+      res.status(500).send('Failed to save event.');
+      console.log(req.body);
+    } else {
+      res.status(200).send('Event update saved successfully.');
+      console.log(req.body);
+    }
+  });
+});
+
+app.post('/removeCannonEvents', (req, res) => {
+const {id} = req.body;
+    const deleteStatement = db.prepare(`DELETE FROM cannonEvents WHERE id = ${id}`);
+    deleteStatement.run();
+    deleteStatement.finalize();
+});
+
+app.post('/waitListFromCannon', (req, res) => {
+const {title, start, end, id, 
+  client, phone, examRoom, farmCall, 
+  address, notes, duration } = req.body;
+  db.run(`INSERT INTO waitList (title, start, end, id,
+    client, phone, examRoom, farmCall, address, notes, duration)
+         VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?)`,
+       [title, start, end, id, client, phone, examRoom,
+       farmCall, address, notes, duration], (err) => {
+   if (err) {
+     console.error(err.message);
+     res.status(500).send('Failed to save event.');
+   } else {
+     res.status(200).send('Event saved successfully.');
+     console.log(req.body);
+   }
+ });
+
+    const deleteStatement = db.prepare(`DELETE FROM cannonEvents WHERE id = ${id}`);
+    deleteStatement.run();
+    deleteStatement.finalize();
 });

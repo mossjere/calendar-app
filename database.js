@@ -30,6 +30,72 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         console.log('Table created successfully.');
       }
     });
+    db.run(`CREATE TABLE mossEvents (
+      id TEXT PRIMARY KEY,
+      event INTEGER,
+      title TEXT,
+      start TEXT,
+      end TEXT,
+      client TEXT,
+      patient TEXT,
+      doctor TEXT,
+      phone TEXT,
+      examRoom INTEGER,
+      farmCall INTEGER,
+      address TEXT,
+      notes TEXT,
+      duration TEXT
+    )`, (err) => {
+      if (err) {
+        console.log('Table already exists.');
+      } else {
+        console.log('Table created successfully.');
+      }
+    });
+    db.run(`CREATE TABLE russellEvents (
+      id TEXT PRIMARY KEY,
+      event INTEGER,
+      title TEXT,
+      start TEXT,
+      end TEXT,
+      client TEXT,
+      patient TEXT,
+      doctor TEXT,
+      phone TEXT,
+      examRoom INTEGER,
+      farmCall INTEGER,
+      address TEXT,
+      notes TEXT,
+      duration TEXT
+    )`, (err) => {
+      if (err) {
+        console.log('Table already exists.');
+      } else {
+        console.log('Table created successfully.');
+      }
+    });
+    db.run(`CREATE TABLE cannonEvents (
+      id TEXT PRIMARY KEY,
+      event INTEGER,
+      title TEXT,
+      start TEXT,
+      end TEXT,
+      client TEXT,
+      patient TEXT,
+      doctor TEXT,
+      phone TEXT,
+      examRoom INTEGER,
+      farmCall INTEGER,
+      address TEXT,
+      notes TEXT,
+      duration TEXT
+    )`, (err) => {
+      if (err) {
+        console.log('Table already exists.');
+      } else {
+        console.log('Table created successfully.');
+      }
+    });
     db.run(`CREATE TABLE templates (
         id TEXT PRIMARY KEY,
         event INTEGER,
