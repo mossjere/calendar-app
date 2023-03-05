@@ -4,6 +4,7 @@ var Calendar2;
 var drRussellSchedule;
 var Calendar3;
 var drCannonSchedule;
+var currentTab = 0;
 
 function openForm(info) {
   if (info != null) {
@@ -64,30 +65,81 @@ async function submitForm() {
     duration: (new Date(document.getElementById("formEndTime").value).getHours()
       - new Date(document.getElementById("formStartTime").value).getHours()).toString().padStart(2, '0')
       + ":" + (new Date(document.getElementById("formEndTime").value).getMinutes()
-        - new Date(document.getElementById("formStartTime").value).getMinutes()).toString().padStart(2, '0')
+        - new Date(document.getElementById("formStartTime").value).getMinutes()).toString().padStart(2, '0'),
+    doctor: ""
   };
   // var start = new Date(document.getElementById("formStartTime").value);
   // var end = new Date(document.getElementById("formEndTime").value);
 
-  console.log(info.end);
-  axios.post('/events', {
-    title: info.title,
-    start: info.start,
-    end: info.end,
-    id: Date.now().toString(),
-    client: info.client,
-    phone: info.phone,
-    examRoom: info.examRoom,
-    farmCall: info.farmCall,
-    address: info.address,
-    notes: info.notes,
-    duration: info.duration
-  }).then((response) => {
-    // console.log(response);
-    drMossSchedule.refetchEvents()
-  }).catch((error) => {
-    console.log(error);
-  });
+  // console.log(info.end);
+  if (currentTab == 0) {
+    info.doctor = "Moss";
+    axios.post('/eventsMoss', {
+      title: info.title,
+      start: info.start,
+      end: info.end,
+      id: Date.now().toString(),
+      client: info.client,
+      phone: info.phone,
+      examRoom: info.examRoom,
+      farmCall: info.farmCall,
+      address: info.address,
+      notes: info.notes,
+      duration: info.duration,
+      doctor: "Moss"
+    }).then((response) => {
+      // console.log(response);
+      drMossSchedule.refetchEvents()
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+  else if(currentTab == 1)
+  {
+    info.doctor = "Russell";
+    axios.post('/eventsRussell', {
+      title: info.title,
+      start: info.start,
+      end: info.end,
+      id: Date.now().toString(),
+      client: info.client,
+      phone: info.phone,
+      examRoom: info.examRoom,
+      farmCall: info.farmCall,
+      address: info.address,
+      notes: info.notes,
+      duration: info.duration,
+      doctor: "Russell"
+    }).then((response) => {
+      // console.log(response);
+      drMossSchedule.refetchEvents()
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+  else if(currentTab == 2)
+  {
+    info.doctor = "Cannon";
+    axios.post('/eventsCannon', {
+      title: info.title,
+      start: info.start,
+      end: info.end,
+      id: Date.now().toString(),
+      client: info.client,
+      phone: info.phone,
+      examRoom: info.examRoom,
+      farmCall: info.farmCall,
+      address: info.address,
+      notes: info.notes,
+      duration: info.duration,
+      doctor: "Cannon"
+    }).then((response) => {
+      // console.log(response);
+      drMossSchedule.refetchEvents()
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
   closeForm();
   // $('#calendar').fullCalendar('rerenderEvents');
 }
@@ -163,6 +215,8 @@ jQuery(function () {
         drRussellSchedule.render();
         // drCannonSchedule.refetchEvents();
         drCannonSchedule.render();
+        closeForm();
+        currentTab = $("#tabs").tabs('option', 'active');
       }
     });
   });
@@ -308,7 +362,7 @@ jQuery(function () {
     },
     drop: async function (info) {
       var index = $("#tabs").tabs('option', 'active');
-      console.log(index);
+      // console.log(index);
       if (info.draggedEl.parentNode.getAttribute("id") == "event-parkingSpot") {
         info.draggedEl.parentNode.removeChild(info.draggedEl);
         console.log(info);
@@ -334,7 +388,6 @@ jQuery(function () {
       });
     },
     eventClick: function (info) {
-      console.log(info);
       drMossSchedule.changeView('list', info.event.start);
     },
     dateClick: function (info) {
