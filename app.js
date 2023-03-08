@@ -187,12 +187,12 @@ app.get('/loadWaitList', (req, res) => {
 app.post('/eventsMoss', (req, res) => {
   const { title, start, end, id, 
     client, phone, examRoom, farmCall, 
-    address, notes, duration, doctor } = req.body;
+    address, notes, duration, patient, doctor } = req.body;
   db.run(`INSERT INTO mossEvents (title, start, end, id,
-     client, phone, examRoom, farmCall, address, notes, duration, doctor)
-          VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?)`,
+     client, phone, examRoom, farmCall, address, notes, duration, patient, doctor)
+          VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?)`,
         [title, start, end, id, client, phone, examRoom,
-        farmCall, address, notes, duration, doctor], (err) => {
+        farmCall, address, notes, duration, patient, doctor], (err) => {
     if (err) {
       console.error(err.message);
       res.status(500).send('Failed to save event.');
@@ -202,12 +202,30 @@ app.post('/eventsMoss', (req, res) => {
     }
   });
 });
-
+// title: info.title,
+//       start: info.start,
+//       end: info.end,
+//       id: info.id,
+//       client: info.client,
+//       phone: info.phone,
+//       examRoom: info.examRoom,
+//       farmCall: info.farmCall,
+//       address: info.address,
+//       notes: info.notes,
+//       duration: info.duration,
+//       patient: info.patient,
+//       doctor: "Moss"
   app.post('/updateMossEvent', (req, res) => {
-    const { title, start, end, id} = req.body;
+    const { title, start, end, id, client, 
+      phone, examRoom, farmCall, address, notes,
+      duration, patient, doctor} = req.body;
     db.run(`UPDATE mossEvents 
-            SET title = ?, start = ?, end = ?
-            WHERE id = ?`, [title, start, end, id], (err) => {
+            SET title = ?, start = ?, end = ?, client = ?, 
+            phone = ?, examRoom = ?, farmCall = ?, address = ?,
+            notes = ?, duration = ?, patient = ?, doctor = ?
+            WHERE id = ?`, [title, start, end, client, 
+              phone, examRoom, farmCall, address, notes,
+              duration, patient, doctor, id], (err) => {
       if (err) {
         console.error(err.message);
         res.status(500).send('Failed to save event.');
@@ -269,12 +287,12 @@ app.get('/eventsRussell', (req, res) => {
 app.post('/eventsRussell', (req, res) => {
 const { title, start, end, id, 
   client, phone, examRoom, farmCall, 
-  address, notes, duration, doctor } = req.body;
+  address, notes, duration, patient, doctor } = req.body;
 db.run(`INSERT INTO russellEvents (title, start, end, id,
-   client, phone, examRoom, farmCall, address, notes, duration, doctor)
-        VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?)`,
+   client, phone, examRoom, farmCall, address, notes, duration, patient, doctor)
+        VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?, ?)`,
       [title, start, end, id, client, phone, examRoom,
-      farmCall, address, notes, duration, doctor], (err) => {
+      farmCall, address, notes, duration, patient, doctor], (err) => {
   if (err) {
     console.error(err.message);
     res.status(500).send('Failed to save event.');
@@ -286,10 +304,16 @@ db.run(`INSERT INTO russellEvents (title, start, end, id,
 });
 
 app.post('/updateRussellEvent', (req, res) => {
-  const { title, start, end, id} = req.body;
+  const { title, start, end, id, client, 
+    phone, examRoom, farmCall, address, notes,
+    duration, patient, doctor} = req.body;
   db.run(`UPDATE russellEvents 
-          SET title = ?, start = ?, end = ?
-          WHERE id = ?`, [title, start, end, id], (err) => {
+          SET title = ?, start = ?, end = ?, client = ?, 
+          phone = ?, examRoom = ?, farmCall = ?, address = ?,
+          notes = ?, duration = ?, patient = ?, doctor = ?
+          WHERE id = ?`, [title, start, end, client, 
+            phone, examRoom, farmCall, address, notes,
+            duration, patient, doctor, id], (err) => {
     if (err) {
       console.error(err.message);
       res.status(500).send('Failed to save event.');
@@ -350,12 +374,12 @@ app.get('/eventsCannon', (req, res) => {
 app.post('/eventsCannon', (req, res) => {
 const { title, start, end, id, 
   client, phone, examRoom, farmCall, 
-  address, notes, duration, doctor } = req.body;
+  address, notes, duration, patient, doctor } = req.body;
 db.run(`INSERT INTO cannonEvents (title, start, end, id,
-   client, phone, examRoom, farmCall, address, notes, duration, doctor)
+   client, phone, examRoom, farmCall, address, notes, duration, patient, doctor)
         VALUES (?, ?, ?, ?, ?, ? ,? ,? ,? ,? ,?, ?)`,
       [title, start, end, id, client, phone, examRoom,
-      farmCall, address, notes, duration, doctor], (err) => {
+      farmCall, address, notes, duration, patient, doctor], (err) => {
   if (err) {
     console.error(err.message);
     res.status(500).send('Failed to save event.');
@@ -367,10 +391,16 @@ db.run(`INSERT INTO cannonEvents (title, start, end, id,
 });
 
 app.post('/updateCannonEvent', (req, res) => {
-  const { title, start, end, id} = req.body;
+  const { title, start, end, id, client, 
+    phone, examRoom, farmCall, address, notes,
+    duration, patient, doctor} = req.body;
   db.run(`UPDATE cannonEvents 
-          SET title = ?, start = ?, end = ?
-          WHERE id = ?`, [title, start, end, id], (err) => {
+          SET title = ?, start = ?, end = ?, client = ?, 
+          phone = ?, examRoom = ?, farmCall = ?, address = ?,
+          notes = ?, duration = ?, patient = ?, doctor = ?
+          WHERE id = ?`, [title, start, end, client, 
+            phone, examRoom, farmCall, address, notes,
+            duration, patient, doctor, id], (err) => {
     if (err) {
       console.error(err.message);
       res.status(500).send('Failed to save event.');

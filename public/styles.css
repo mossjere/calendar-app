@@ -20,7 +20,7 @@ html, body {
   #event-parkingSpot{
     position: fixed;
     z-index: 2;
-    top: 500px;
+    top: 350px;
     left: 20px;
     width: 150px;
     padding: 0 10px;
@@ -90,11 +90,11 @@ html, body {
 /* The popup form - hidden by default */
 .form-popup {
   display: none;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-25%, -25%);
+  transform: translate(-25%, -50%);
   border: 3px solid #f1f1f1;
   z-index: 9;
 }
@@ -196,4 +196,37 @@ html, body {
 /* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
+}
+
+#formContainer{
+  display: none;
+  position: fixed;
+  left: 35%;
+  top: 50%;
+  -webkit-transform: translate(-25%, -25%);
+  transform: translate(-25%, -50%);
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+  width: auto;
+  opacity: 1;
+  background-color: #555;
+  /* text-align: center; */
+  align-items: center;
+  color: #fce550;
+  /* width: 100%; */
+}
+
+#form_address_div{
+  display: none;
+}
+
+input[type="text"], input[type="datetime-local"], textarea{
+  width: 100%;
+}
+
+.btn
+{
+  width: 200px;
+  margin: 0 auto;
+  display: inline;
 }
